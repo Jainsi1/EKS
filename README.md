@@ -2,4 +2,4 @@
 ### chmod +x main.sh
 ### ./main.sh
 
-####### main.sh will help to create EKS Cluster with Nginx Ingress Controller , Metrics Server, AutoScaler
+###### main.sh will help to create EKS Cluster with Nginx Ingress Controller , Metrics Server, AutoScaler
