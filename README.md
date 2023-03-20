@@ -11,15 +11,15 @@ Complete automated script for EKS Deployment using Terraform with the Deployment
 # Helm Charts 
  Helm charts used here are as:
 
-1. Nginx Ingress Controller:
+1. ## Nginx Ingress Controller:
 NGINX Ingress Controller provides a robust feature set to secure, strengthen, and scale your containerized apps.
 NGINX Ingress Controller works with both NGINX and NGINX Plus and supports the standard Ingress features - content-based routing and TLS/SSL termination. NGINX Ingress Controller supports the VirtualServer and VirtualServerRoute resources. They enable use cases not supported with the Ingress resource, such as traffic splitting and advanced content-based routing.
 
-2. Cluster Autoscaler:
+2. ## Cluster Autoscaler:
 Kubernetes Cluster Autoscaler automatically adjusts the number of nodes in your cluster when pods fail or are rescheduled onto other nodes. The Cluster Autoscaler is typically installed as a Deployment in your cluster.
 Cluster autoscaler scales down only the nodes that can be safely removed.
 
-3. Metric Server:
+3. ## Metric Server:
 The Kubernetes Metrics Server collects resource metrics from the kubelet running on each worker node and exposes them in the Kubernetes API server through the Kubernetes Metrics API.
 
 
