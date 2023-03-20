@@ -57,9 +57,9 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |eks_managed_node_group_default_instance_type          |Instance types                          |string |""     |
 |managed_nodes_min_capacity    |minimum  number of  pods running        |number |       |
 |managed_nodes_max_capacity          |maximum number of  pods running |number   |  |
-|managed_nodes_desired_capacity | desired size which we want always|number |1      |
+|managed_nodes_desired_capacity | desired size of pod which we want always|number |1      |
 |managed_nodes_instance_type_list    |         | list|[ ]    |
-|managed_nodes_capacity_type  | Capacity type                                  |string |""     |
+|managed_nodes_capacity_type  | Capacity type                                  |string |On Demand     |
 |managed_nodes_tags          |Aditional tags for the node |map |{ }|
 
 
