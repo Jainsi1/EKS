@@ -48,10 +48,10 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |------------------|-----------------------                              |-------|-------|
 |vpc_name    |Name of your vpc                               |string |""     |
 |vpc_cidr  |The IPv4 CIDR block for the VPC                    |string |0.0.0.0/0|
-|vpc_azs          |A list of availability zones names                          |string |[ ]     |
-|vpc_private_subnets    |private subnets inside the VPC              |list |[ ]       |
-|vpc_public_subnets          |private subnets inside the VPC | list  |[ ]  |
-|vpc_tags |Additional tags for the VPC	        |map |{ }     |
+|vpc_azs          |A list of availability zones names                          |list(strings) |[ ]     |
+|vpc_private_subnets    |private subnets inside the VPC              |list(strings) |[ ]       |
+|vpc_public_subnets          |private subnets inside the VPC | list(strings)  |[ ]  |
+|vpc_tags |Additional tags for the VPC	        |map(strings) |{ }     |
 |eks_cluster_name    |Name of your cluster                               |string |""     |
 |eks_cluster_version  | Kubernetes `<major>.<minor>` version to use for the EKS cluste       |string |null    |
 |eks_managed_node_group_default_instance_type          |Instance types                          |string |""     |
@@ -60,7 +60,7 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |managed_nodes_desired_capacity | desired size of pod which we want always|number |     |
 |managed_nodes_instance_type_list    |    instance types      | list|[ ]    |
 |managed_nodes_capacity_type  | Capacity type of ec2          |string |On Demand     |
-|managed_nodes_tags          |Aditional tags for the node |map |{ }|
+|managed_nodes_tags          |Aditional tags for the node |map(strings) |{ }|
 
 
 # Outputs
