@@ -11,7 +11,7 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [HelmCharts](#Helm Charts)
+- [HelmCharts](#helmCharts)
 - [Inputs](#Inputs)
 - [Outputs](#Outputs)
 
