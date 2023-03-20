@@ -2,7 +2,17 @@
 Complete automated script for EKS Deployment using Terraform with the Deployment of Ingress Controller , Metric Server and Cluster Autoscaler
 
 # Features
-* Contains a bash file in which terraform commands are written to build infrastructure and it also consistes of all the required helm charts.
+* Contains a bash file in which terraform commands are written to build infrastructure and it also installs all the required helm charts.
+* For running this you have to just run the bash file by giving it permission to execute as:
+
+### chmod +x main.sh
+### ./main.sh
+
+# Helm Charts 
+* Helm charts used here are as:
+## 1. Nginx Ingress Controller
+## 2. Cluster Autoscaler
+## 3. Metric Server
 
 
 
@@ -22,9 +32,9 @@ Complete automated script for EKS Deployment using Terraform with the Deployment
 |managed_nodes_min_capacity    |            |number |       |
 |managed_nodes_max_capacity          |  |number   |  |
 |managed_nodes_desired_capacitytags | |number |1      |
-|managed_nodes_instance_type_list    |         |string |    |
-|managed_nodes_capacity_type  |                                  |string |""     |
-|managed_nodes_tags          | |string |""     |
+|managed_nodes_instance_type_list    |         | |    |
+|managed_nodes_capacity_type  | Capacity type                                  |string |""     |
+|managed_nodes_tags          |Aditional tags for the node |string |""     |
 
 
 # Outputs
