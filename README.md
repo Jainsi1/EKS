@@ -47,7 +47,7 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |Name              |Description                                          |Type   |Default|
 |------------------|-----------------------                              |-------|-------|
 |vpc_name    |Name of your vpc                               |string |""     |
-|vpc_cidr  |The IPv4 CIDR block for the VPC                    |string |""     |0.0.0.0/0
+|vpc_cidr  |The IPv4 CIDR block for the VPC                    |string |0.0.0.0/0|
 |vpc_azs          |A list of availability zones names                          |string |[]     |
 |vpc_private_subnets    |private subnets inside the VPC              | |[]       |
 |vpc_public_subnets          |private subnets inside the VPC |   |[]  |
