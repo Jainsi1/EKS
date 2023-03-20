@@ -55,11 +55,11 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |eks_cluster_name    |Name of your cluster                               |string |""     |
 |eks_cluster_version  | Kubernetes `<major>.<minor>` version to use for the EKS cluste       |string |null    |
 |eks_managed_node_group_default_instance_type          |Instance types                          |string |""     |
-|managed_nodes_min_capacity    |minimum  number of  pods running        |number |       |
+|managed_nodes_min_capacity    |minimum  number of  pods running        |number |  1     |
 |managed_nodes_max_capacity          |maximum number of  pods running |number   |  |
-|managed_nodes_desired_capacity | desired size of pod which we want always|number |1      |
-|managed_nodes_instance_type_list    |         | list|[ ]    |
-|managed_nodes_capacity_type  | Capacity type                                  |string |On Demand     |
+|managed_nodes_desired_capacity | desired size of pod which we want always|number |     |
+|managed_nodes_instance_type_list    |    instance types      | list|[ ]    |
+|managed_nodes_capacity_type  | Capacity type of ec2          |string |On Demand     |
 |managed_nodes_tags          |Aditional tags for the node |map |{ }|
 
 
