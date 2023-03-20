@@ -11,7 +11,7 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Helm Charts](#Helm Charts)
+- [HelmCharts](#Helm Charts)
 - [Inputs](#Inputs)
 - [Outputs](#Outputs)
 
@@ -26,7 +26,7 @@ Complete automated script for EKS Deployment using Terraform with the Deployment
   1. chmod +x main.sh
   2. ./main.sh
 
-# Helm Charts 
+# HelmCharts 
  Helm charts used here are as:
 
 1. ## Nginx Ingress Controller:
