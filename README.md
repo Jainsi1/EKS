@@ -51,7 +51,7 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |vpc_azs          |A list of availability zones names                          |string |[ ]     |
 |vpc_private_subnets    |private subnets inside the VPC              | |[ ]       |
 |vpc_public_subnets          |private subnets inside the VPC |   |[ ]  |
-|vpc_tags |Additional tags for the VPC	        | |{ }     |
+|vpc_tags |Additional tags for the VPC	        |map |{ }     |
 |eks_cluster_name    |Name of your cluster                               |string |""     |
 |eks_cluster_version  | Kubernetes `<major>.<minor>` version to use for the EKS cluste       |string |null    |
 |eks_managed_node_group_default_instance_type          |Instance types                          |string |""     |
@@ -60,7 +60,7 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |managed_nodes_desired_capacity | desired size which we want always|number |1      |
 |managed_nodes_instance_type_list    |         |[ ] |    |
 |managed_nodes_capacity_type  | Capacity type                                  |string |""     |
-|managed_nodes_tags          |Aditional tags for the node |string |{ }|
+|managed_nodes_tags          |Aditional tags for the node |map |{ }|
 
 
 # Outputs
