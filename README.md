@@ -1,4 +1,22 @@
 # EKS Automation 
+
+<h1 align="center"> Virtuecloud </h1> <br>
+<p align="center">
+  <a href="https://virtuecloud.io/">
+    <img alt="Virtuecloud" title="Virtuecloud" src="https://virtuecloud.io/assets/images/VitueCloud_Logo.png" width="450">
+  </a>
+</p>
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Helm Charts](#Helm Charts)
+- [Inputs](#Inputs)
+- [Outputs](#Outputs)
+
+# Introduction
+
 Complete automated script for EKS Deployment using Terraform with the Deployment of Ingress Controller , Metric Server and Cluster Autoscaler
 
 # Features
@@ -37,10 +55,10 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |eks_cluster_name    |Name of your cluster                               |string |""     |
 |eks_cluster_version  | Kubernetes `<major>.<minor>` version to use for the EKS cluste       |string |null    |
 |eks_managed_node_group_default_instance_type          |Instance types                          |string |""     |
-|managed_nodes_min_capacity    |            |number |       |
-|managed_nodes_max_capacity          |  |number   |  |
-|managed_nodes_desired_capacitytags | |number |1      |
-|managed_nodes_instance_type_list    |         | |    |
+|managed_nodes_min_capacity    |minimum  number of  pods running        |number |       |
+|managed_nodes_max_capacity          |maximum number of  pods running |number   |  |
+|managed_nodes_desired_capacity | desired size which we want always|number |1      |
+|managed_nodes_instance_type_list    |         |[] |    |
 |managed_nodes_capacity_type  | Capacity type                                  |string |""     |
 |managed_nodes_tags          |Aditional tags for the node |string |""     |
 
