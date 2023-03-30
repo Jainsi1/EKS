@@ -21,13 +21,7 @@
 Complete automated script for EKS Deployment using Terraform with the Deployment of Ingress Controller , Metric Server and Cluster Autoscaler
 
 # Architecture Diagram
-
-<img
-  src="ecs_architecture.png"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
-
+![ecs_architecture](https://user-images.githubusercontent.com/75137939/228916480-0781b084-860a-43c5-9621-60f319a53606.jpg)
 
 # Features
 * Contains a bash file in which terraform commands are written to build infrastructure and it also installs all the required helm charts.
