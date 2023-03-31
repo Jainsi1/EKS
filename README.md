@@ -20,7 +20,7 @@
 
 Complete automated script for EKS Deployment using Terraform with the Deployment of Ingress Controller , Metric Server and Cluster Autoscaler
 
-# Architecture Diagram
+# Architecture
 ![Untitled Diagram-5 drawio-2](https://user-images.githubusercontent.com/75137939/228917933-310812a3-4640-489f-800e-24ea4729b076.png)
 
 # Features
