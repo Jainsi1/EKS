@@ -10,7 +10,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Architecture] (#architecture)
+- [Architecture](#architecture)
 - [Features](#features)
 - [HelmCharts](#helmCharts)
 - [Inputs](#Inputs)
