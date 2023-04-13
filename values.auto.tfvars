@@ -8,7 +8,7 @@ vpc_tags={
     Environment = "dev"
   }
 eks_cluster_name="eks-dev-cluster"
-eks_cluster_version="1.25"
+eks_cluster_version="1.26"
 eks_managed_node_group_default_instance_type=["t3.medium"]
 managed_nodes_min_capacity=1
 managed_nodes_max_capacity=10
