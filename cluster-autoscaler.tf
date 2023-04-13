@@ -1,3 +1,25 @@
+resource "aws_iam_policy" "cluster-autoscaler-additional" {
+  name = "${module.eks.cluster_name}-cluster-autoscaler-node-group-additional"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeTags",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "ec2:DescribeLaunchTemplateVersions"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
 data "aws_iam_policy_document" "clusterautoscaler-role-policy" {
   statement {
     effect = "Allow"

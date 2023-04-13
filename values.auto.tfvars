@@ -20,3 +20,4 @@ managed_nodes_tags={
       }
 efs_name = "test"
 encryption = false
+ssm_policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"

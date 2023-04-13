@@ -26,7 +26,8 @@ module "eks" {
   eks_managed_node_group_defaults = {
     instance_types = var.eks_managed_node_group_default_instance_type
     iam_role_additional_policies = {
-      additional = aws_iam_policy.cluster-autoscaler-additional.arn
+      additional1 = aws_iam_policy.cluster-autoscaler-additional.arn, 
+      additional2 = var.ssm_policy_arn
     }
   }
 
@@ -41,27 +42,4 @@ module "eks" {
       labels = var.managed_nodes_tags
     }
   }
-}
-
-resource "aws_iam_policy" "cluster-autoscaler-additional" {
-  name = "${module.eks.cluster_name}-cluster-autoscaler-node-group-additional"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "autoscaling:DescribeAutoScalingInstances",
-          "autoscaling:SetDesiredCapacity",
-          "autoscaling:DescribeAutoScalingGroups",
-          "autoscaling:DescribeTags",
-          "autoscaling:DescribeLaunchConfigurations",
-          "autoscaling:TerminateInstanceInAutoScalingGroup",
-          "ec2:DescribeLaunchTemplateVersions"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
 }

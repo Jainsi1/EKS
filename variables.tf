@@ -63,3 +63,6 @@ variable "efs_name" {
 variable "encryption" {
   
 }
+variable "ssm_policy_arn" {
+  
+}
