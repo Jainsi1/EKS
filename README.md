@@ -103,7 +103,7 @@ spec:
         objectType: "secretsmanager"
 ```
 ## Update your Deployment Yaml
-###Update Volume in Deployment Yaml
+### Update Volume in Deployment Yaml
 ```
       volumes:
         - name: secrets-store-inline
@@ -113,7 +113,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "my-provider"
 ```
-###Mount Volume from Container Spec in Deployment Yaml
+### Mount Volume from Container Spec in Deployment Yaml
 ```
           volumeMounts:
             - name: secrets-store-inline
