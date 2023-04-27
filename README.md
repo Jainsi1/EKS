@@ -120,3 +120,12 @@ spec:
               mountPath: "/mnt/"
               readOnly: true
 ```
+### Use Secret as ENV in Container Spec
+```
+          env:
+          - name: EXAMPLE_ENV
+            valueFrom:
+              secretKeyRef:
+                name: eks-secret
+                key: username
+```
