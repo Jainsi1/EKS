@@ -89,3 +89,6 @@ variable "encryption" {
 variable "ssm_policy_arn" {
   description = "AWS managed ssm policy arn"
 }
+variable "provider_region" {
+  description = "Region of Provider"
+}
