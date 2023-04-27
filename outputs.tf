@@ -34,3 +34,6 @@ output "cluster-autosclaer-role-arn" {
 output "cluster-version" {
   value = module.eks.cluster_version
 }
+output "secret-manager-role-arn" {
+  value = aws_iam_role.secret-manager-role.arn
+}

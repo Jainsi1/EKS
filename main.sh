@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 terraform init
 terraform plan
 terraform apply -auto-approve
@@ -16,3 +17,5 @@ kubectl patch deployment cluster-autoscaler \
 kubectl set image deployment cluster-autoscaler \
   -n kube-system \
   cluster-autoscaler=registry.k8s.io/autoscaling/cluster-autoscaler:v1.25.0
+export SECRET_MANAGER_ROLE=`terraform output secret-manager-role-arn| tr -d '"'` && envsubst < sample-nginx-app/values-template.yaml > sample-nginx-app/values.yaml
+helm upgrade -i sample-nginx-app sample-nginx-app/
