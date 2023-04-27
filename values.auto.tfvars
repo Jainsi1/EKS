@@ -1,9 +1,9 @@
 provision_vpc = true
 # If provision_vpc = false then you have to update the values of vpc_id, public_subnet_ids and private_subnet_ids 
 provider_region = "ap-south-1"
-vpc_id = "vpc-0794be7df60fb93dc"
-private_subnet_ids = [ "subnet-0dc6cb24003cd8016","subnet-057c6c898823f9ace","subnet-0158e3bd7e23464f9" ]
-public_subnet_ids = [ "subnet-0f0603d69c2ffc5bc","subnet-0549109342a2ceb0a","subnet-06dec148e65d080a5" ]
+vpc_id = ""
+private_subnet_ids = [ "" ]
+public_subnet_ids = [ "" ]
 # If provision_vpc = true then you have to change the following values as per your needs
 vpc_name="dev-vpc"
 vpc_cidr="10.2.0.0/16"
