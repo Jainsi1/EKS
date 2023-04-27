@@ -1,15 +1,15 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  count = var.provision_vpc ? 1 : 0
+  name = var.provision_vpc ? var.vpc_name : null
+  cidr = var.provision_vpc ? var.vpc_cidr : null
 
-  name = var.vpc_name
-  cidr = var.vpc_cidr
+  azs             = var.provision_vpc ? var.vpc_azs : null
+  private_subnets = var.provision_vpc ? var.vpc_private_subnets : null
+  public_subnets  = var.provision_vpc ? var.vpc_public_subnets : null
 
-  azs             = var.vpc_azs
-  private_subnets = var.vpc_private_subnets
-  public_subnets  = var.vpc_public_subnets
+  enable_nat_gateway = var.provision_vpc ? true : false
+  single_nat_gateway  = var.provision_vpc ? true : false
 
-  enable_nat_gateway = true
-  single_nat_gateway  = true
-
-  tags = var.vpc_tags
+  tags = var.provision_vpc ? var.vpc_tags : null
 }

@@ -19,9 +19,9 @@ module "eks" {
     }
   }
 
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
-  control_plane_subnet_ids = module.vpc.public_subnets
+  vpc_id                   = var.provision_vpc ? module.vpc.vpc_id : var.vpc_id
+  subnet_ids               = var.provision_vpc ? module.vpc.private_subnets : var.private_subnet_ids
+  control_plane_subnet_ids = var.provision_vpc ? module.vpc.public_subnets : var.public_subnet_ids
 
   eks_managed_node_group_defaults = {
     instance_types = var.eks_managed_node_group_default_instance_type
