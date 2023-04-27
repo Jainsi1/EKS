@@ -7,6 +7,8 @@ export CLUSTER_NAME=`terraform output eks_cluster_name | tr -d '"'` && export AU
 kubectl create namespace utilities || true
 helm upgrade -i ingress-nginx ingress-nginx/ -n utilities || echo "ingress controller already installed"
 helm upgrade -i metrics-server metrics-server/ -n utilities || echo "metrics server already installed"
+helm upgrade -i secrets-store-csi-driver secrets-store-csi-driver/ -n kube-system
+helm upgrade -i secrets-store-csi-driver-provider-aws secrets-store-csi-driver-provider-aws/ -n kube-system
 kubectl apply -f cluster-autoscaler-with-envs.yml
 kubectl patch deployment cluster-autoscaler \
   -n kube-system \

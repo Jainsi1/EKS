@@ -79,3 +79,53 @@ The Kubernetes Metrics Server collects resource metrics from the kubelet running
 |cluster-autosclaer-role-arn  |ARN of the cluster-autoscaler role|
 |cluster-version|version of cluster|
 
+# Secrets Store CSI Driver Usage
+
+To use the Secrets Store CSI driver, create a SecretProviderClass custom resource to provide driver configurations and provider-specific parameters to the CSI driver.
+A SecretProviderClass custom resource should have the following components:
+
+```
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: my-provider
+spec:
+  provider: aws   
+  secretObjects:
+  - secretName: eks-secret
+    type: Opaque
+    data:
+    - objectName: examplesecret
+      key: username
+  parameters:
+    objects: |
+      - objectName: "examplesecret"  # the AWS secret
+        objectType: "secretsmanager"
+```
+## Update your Deployment Yaml
+### Update Volume in Deployment Yaml
+```
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "my-provider"
+```
+### Mount Volume from Container Spec in Deployment Yaml
+```
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/"
+              readOnly: true
+```
+### Use Secret as ENV in Container Spec
+```
+          env:
+          - name: EXAMPLE_ENV
+            valueFrom:
+              secretKeyRef:
+                name: eks-secret
+                key: username
+```
