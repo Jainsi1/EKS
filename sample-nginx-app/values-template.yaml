@@ -24,6 +24,17 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: "nginx"
 
+env:
+  - name: test
+    value: temp
+secret_env:
+  - name: SECRET_MANAGER_WORKING
+    aws_secret: sample-env
+  - name: SECRET_MANAGER_2_WORKING
+    aws_secret: sample-env
+  - name: SECRET_MANAGER_3_WORKING
+    aws_secret: smnginxtest
+
 podAnnotations:
   rollme: "{{ randAlphaNum 5 | quote }}"
 

@@ -34,11 +34,17 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: SAMPLE_USERNAME
+          {{- range .Values.env }}
+          - name: {{ .name }}
+            value: {{ .value }}
+          {{- end }}
+          {{- range .Values.secret_env }}
+          - name: {{ .name }}
             valueFrom:
               secretKeyRef:
-                name: eks-secret
-                key: username
+                name: application-secret
+                key: {{ .aws_secret }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
