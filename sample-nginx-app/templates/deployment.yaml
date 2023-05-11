@@ -42,7 +42,7 @@ spec:
           - name: {{ .name }}
             valueFrom:
               secretKeyRef:
-                name: application-secret
+                name: application-secret-{{ .aws_secret }}
                 key: {{ .aws_secret }}
           {{- end }}
           ports:
@@ -57,12 +57,21 @@ spec:
             httpGet:
               path: /
               port: http
-          volumeMounts:
-            - name: secrets-store-inline
-              mountPath: "/mnt/"
-              readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+      {{- with .Values.csi_volume }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              readOnly: {{ .readOnly }}
+      volumes:
+        - name: {{ .name }}
+          csi:
+            driver: {{ .driver }}
+            readOnly: {{ .readOnly }}
+            volumeAttributes:
+              secretProviderClass: {{ .secretProviderClassName }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -75,10 +84,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-        - name: secrets-store-inline
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "my-provider"

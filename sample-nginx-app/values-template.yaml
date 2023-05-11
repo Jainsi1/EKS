@@ -27,14 +27,19 @@ serviceAccount:
 env:
   - name: test
     value: temp
+
 secret_env:
   - name: SECRET_MANAGER_WORKING
-    aws_secret: sample-env
-  - name: SECRET_MANAGER_2_WORKING
     aws_secret: sample-env
   - name: SECRET_MANAGER_3_WORKING
     aws_secret: smnginxtest
 
+csi_volume:
+  name: secrets-store-inline
+  driver: secrets-store.csi.k8s.io
+  readOnly: true
+  secretProviderClassName: "application-secret-provider"
+  mountPath: "/mnt/"
 podAnnotations:
   rollme: "{{ randAlphaNum 5 | quote }}"
 
