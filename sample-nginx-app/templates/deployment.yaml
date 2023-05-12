@@ -42,7 +42,7 @@ spec:
           - name: {{ .name }}
             valueFrom:
               secretKeyRef:
-                name: application-secret-{{ .aws_secret }}
+                name: application-secret-{{ lower .aws_secret }}
                 key: {{ .aws_secret }}
           {{- end }}
           ports:
@@ -59,8 +59,8 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
       {{- with .Values.csi_volume }}
+          volumeMounts:
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
               readOnly: {{ .readOnly }}
