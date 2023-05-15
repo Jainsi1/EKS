@@ -28,10 +28,10 @@ env:
   - name: test
     value: temp
 
-secret_region: ap-southeast-1
+secret_region: ap-south-1
 secret_env:
   - name: SECRET_MANAGER_WORKING
-    aws_secret: SINGAPORE
+    aws_secret: TESTING
 
 csi_volume:
   name: secrets-store-inline
