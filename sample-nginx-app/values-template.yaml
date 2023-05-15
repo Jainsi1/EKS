@@ -30,9 +30,7 @@ env:
 
 secret_env:
   - name: SECRET_MANAGER_WORKING
-    aws_secret: sample-env
-  - name: SECRET_MANAGER_3_WORKING
-    aws_secret: smnginxtest
+    aws_secret: TESTING
 
 csi_volume:
   name: secrets-store-inline
@@ -42,6 +40,7 @@ csi_volume:
   mountPath: "/mnt/"
 podAnnotations:
   rollme: "{{ randAlphaNum 5 | quote }}"
+  reloader.stakater.com/auto: "true"
 
 podSecurityContext: {}
   # fsGroup: 2000

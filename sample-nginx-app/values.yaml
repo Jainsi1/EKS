@@ -8,7 +8,7 @@ image:
   repository: nginx
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -30,9 +30,7 @@ env:
 
 secret_env:
   - name: SECRET_MANAGER_WORKING
-    aws_secret: sample-env
-  - name: SECRET_MANAGER_3_WORKING
-    aws_secret: smnginxtest
+    aws_secret: TESTING
 
 csi_volume:
   name: secrets-store-inline
@@ -40,9 +38,9 @@ csi_volume:
   readOnly: true
   secretProviderClassName: "application-secret-provider"
   mountPath: "/mnt/"
-
 podAnnotations:
   rollme: "{{ randAlphaNum 5 | quote }}"
+  reloader.stakater.com/auto: "true"
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -66,7 +64,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: examples.charts.com
+    - host: example.charts.com
       paths:
         - path: /
           pathType: ImplementationSpecific
