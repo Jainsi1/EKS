@@ -92,3 +92,9 @@ variable "ssm_policy_arn" {
 variable "provider_region" {
   description = "Region of Provider"
 }
+variable "ebs_disk_size" {
+  
+}
+variable "custom_launch_template_bool" {
+  type = bool
+}

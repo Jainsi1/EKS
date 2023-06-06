@@ -16,11 +16,13 @@ vpc_tags={
   }
 
 #eks cluster values
+custom_launch_template_bool = false
 eks_cluster_name="eks-dev-cluster"
-eks_cluster_version="1.26"
+eks_cluster_version="1.27"
 eks_managed_node_group_default_instance_type=["t3.medium"]
 managed_nodes_min_capacity=1
 managed_nodes_max_capacity=10
+ebs_disk_size = 100
 managed_nodes_desired_capacity=1
 managed_nodes_instance_type_list=["t3.medium"]
 managed_nodes_capacity_type="ON_DEMAND"
