@@ -95,6 +95,3 @@ variable "provider_region" {
 variable "ebs_disk_size" {
   
 }
-variable "custom_launch_template_bool" {
-  type = bool
-}

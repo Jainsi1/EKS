@@ -15,8 +15,7 @@ vpc_tags={
     Environment = "dev"
   }
 
-#eks cluster values
-custom_launch_template_bool = false
+#eks cluster values.
 eks_cluster_name="eks-dev-cluster"
 eks_cluster_version="1.27"
 eks_managed_node_group_default_instance_type=["t3.medium"]

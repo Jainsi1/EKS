@@ -33,14 +33,28 @@ module "eks" {
 
   eks_managed_node_groups = {
     eks-dev-instance = {
-      use_custom_launch_template = var.custom_launch_template_bool
       min_size     = var.managed_nodes_min_capacity
       max_size     = var.managed_nodes_max_capacity
       desired_size = var.managed_nodes_desired_capacity
       disk_size    = var.ebs_disk_size
       instance_types = var.managed_nodes_instance_type_list
       capacity_type  = var.managed_nodes_capacity_type
+      block_device_mappings = {
+        xvda = {
+          device_name = "/dev/xvda"
+          ebs = {
+            volume_size           = var.ebs_disk_size
+            volume_type           = "gp3"
+            iops                  = 3000
+            throughput            = 150
+            delete_on_termination = true
+          }
+        }
+      }
       labels = var.managed_nodes_tags
+      tags = {
+        ExtraTag = "EKS managed node group",
+      }
     }
   }
 }
