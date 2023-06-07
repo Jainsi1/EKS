@@ -39,6 +39,7 @@ module "eks" {
       disk_size    = var.ebs_disk_size
       instance_types = var.managed_nodes_instance_type_list
       capacity_type  = var.managed_nodes_capacity_type
+      ebs_optimized           = true
       block_device_mappings = {
         xvda = {
           device_name = "/dev/xvda"
