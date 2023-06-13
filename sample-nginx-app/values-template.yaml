@@ -39,7 +39,6 @@ csi_volume:
   secretProviderClassName: "application-secret-provider"
   mountPath: "/mnt/"
 podAnnotations:
-  rollme: "{{ randAlphaNum 5 | quote }}"
   reloader.stakater.com/auto: "true"
 
 podSecurityContext: {}
