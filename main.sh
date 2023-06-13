@@ -5,7 +5,7 @@ NEWRELIC_CLUSTERNAME=                          #Put Cluster Name here
 ########
 #example
 # NEWRELIC_LICENSEKEY=bWFudGhhbnZpcnR1ZWNsb3Vk
-# NEWRELIC_CLUSTERNAME=ExampleCluster
+# NEWRELIC_CLUSTERNAME=Example-Cluster
 ########
 terraform init
 terraform plan
@@ -27,6 +27,7 @@ kubectl set image deployment cluster-autoscaler \
 export SECRET_MANAGER_ROLE=`terraform output secret-manager-role-arn| tr -d '"'` && envsubst < sample-nginx-app/values-template.yaml > sample-nginx-app/values.yaml
 helm upgrade -i reloader reloader-kubernetes -n utilities
 helm upgrade -i sample-nginx-app sample-nginx-app/
+
 #NewRelic
 if [ -n "$NEWRELIC_LICENSEKEY" ] && [ -n "$NEWRELIC_CLUSTERNAME" ]; then
   function ver { printf "%03d%03d" $(echo "$1" | tr '.' ' '); } && \
@@ -44,3 +45,4 @@ if [ -n "$NEWRELIC_LICENSEKEY" ] && [ -n "$NEWRELIC_CLUSTERNAME" ]; then
   --set kubeEvents.enabled=true \
   --set logging.enabled=true \
   --set newrelic-logging.lowDataMode=false 
+fi
