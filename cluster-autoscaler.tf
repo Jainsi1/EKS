@@ -44,10 +44,43 @@ data "aws_iam_policy_document" "clusterautoscaler-role-policy" {
     }
   }
 }
+
+data "aws_iam_policy_document" "cluster_autoscaler_policy" {
+  statement {
+    sid       = "VisualEditor0"
+    effect    = "Allow"
+    actions   = [
+      "autoscaling:SetDesiredCapacity",
+      "autoscaling:TerminateInstanceInAutoScalingGroup"
+    ]
+    resources = ["*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:ResourceTag/k8s.io/cluster-autoscaler/${module.eks.cluster_name}"
+      values   = ["owned"]
+    }
+  }
+
+  statement {
+    sid       = "VisualEditor1"
+    effect    = "Allow"
+    actions   = [
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeAutoScalingGroups",
+      "ec2:DescribeLaunchTemplateVersions",
+      "autoscaling:DescribeTags",
+      "autoscaling:DescribeLaunchConfigurations",
+      "ec2:DescribeInstanceTypes"
+    ]
+    resources = ["*"]
+  }
+}
+
 resource "aws_iam_policy" "cluster-autoscaler-policy" {
   name = "${module.eks.cluster_name}-cluster-autoscaler-policy"
 
-  policy = file("./autoscaler-policy.json")
+  policy = data.aws_iam_policy_document.cluster_autoscaler_policy.json
 }
 
 resource "aws_iam_role" "cluster-autoscaler-role" {
