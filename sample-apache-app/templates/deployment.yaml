@@ -1,44 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "nginx.fullname" . }}
+  name: {{ include "sample-apache-app.fullname" . }}
   labels:
-    {{- include "nginx.labels" . | nindent 4 }}
+    {{- include "sample-apache-app.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "nginx.selectorLabels" . | nindent 6 }}
+      {{- include "sample-apache-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        rollme: {{ randAlphaNum 5 | quote }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "nginx.selectorLabels" . | nindent 8 }}
+        {{- include "sample-apache-app.labels" . | nindent 8 }}
+	  {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: {{ .name }}
-        csi:
-          driver: {{ .driver }}
-          readOnly: {{ .readOnly }}
-          volumeAttributes:
-            secretProviderClass: {{ .secretProviderClassName }}
-      - name: auth-volume
+      - name: apache-volume
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: secret
-      serviceAccountName: {{ include "nginx.serviceAccountName" . }}
+            secretProviderClass: "apache-secret"
+      serviceAccountName: nginx
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -47,18 +43,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-          {{- range .Values.env }}
-          - name: {{ .name }}
-            value: {{ .value }}
-          {{- end }}
-          {{- range .Values.secret_env }}
-          - name: {{ .name }}
-            valueFrom:
-              secretKeyRef:
-                name: application-secret-{{ lower .aws_secret }}
-                key: {{ .aws_secret }}
-          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -72,7 +56,7 @@ spec:
               path: /
               port: http
           volumeMounts:
-            - name: auth-volume
+            - name: apache-volume
               mountPath: "/mnt/api"
               readOnly: true
           resources:
@@ -91,9 +75,9 @@ spec:
       {{- end }}
           env:
           - name: ENVIRONMENT
-            value: dev
-          - name: SECRET_MANAGER_WORKING
+            value: test
+          - name: APACHE_SECRET_WORKING
             valueFrom:
               secretKeyRef:
-                name: secret
-                key: SECRET_MANAGER_WORKING
+                name: apache-secret
+                key: APACHE_SECRET_WORKING

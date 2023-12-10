@@ -1,27 +1,7 @@
-# EKS Automation 
-
-<h1 align="center"> Virtuecloud </h1> <br>
-<p align="center">
-  <a href="https://virtuecloud.io/">
-    <img alt="Virtuecloud" title="Virtuecloud" src="https://virtuecloud.io/assets/images/VitueCloud_Logo.png" width="450">
-  </a>
-</p>
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Architecture](#architecture)
-- [Features](#features)
-- [HelmCharts](#helmCharts)
-- [Inputs](#Inputs)
-- [Outputs](#Outputs)
-
-# Introduction
-
-Complete automated script for EKS Deployment using Terraform with the Deployment of Ingress Controller , Metric Server and Cluster Autoscaler
+# EKS Deployment
 
 # Architecture
-![Untitled Diagram-5-5 drawio](https://user-images.githubusercontent.com/75137939/229094596-cf06df3b-6ba2-44d5-b616-07b31184eefd.png)
+
 
 # Features
 * Contains a bash file in which terraform commands are written to build infrastructure and it also installs all the required helm charts.
@@ -43,22 +23,13 @@ Kubernetes Cluster Autoscaler automatically adjusts the number of nodes in your 
 Cluster autoscaler scales down only the nodes that can be safely removed.
 https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler
 
-3. ## Metric Server:
-The Kubernetes Metrics Server collects resource metrics from the kubelet running on each worker node and exposes them in the Kubernetes API server through the Kubernetes Metrics API.
-https://github.com/kubernetes-sigs/metrics-server
-
-4. ## Secrets Store CSI Driver
+3. ## Secrets Store CSI Driver
 The Secrets Store CSI Driver is used with AWS Secrets Manager to securely store and retrieve secrets within a Kubernetes cluster. It provides a seamless integration with AWS Secret Manager, allowing users to leverage its features for managing sensitive information such as API keys, database credentials, and certificates in their Kubernetes applications. This ensures a more secure and scalable approach to secret management in AWS environments.
 https://secrets-store-csi-driver.sigs.k8s.io/
 
-5. ## Secrets Store CSI Driver Provider AWS
+4. ## Secrets Store CSI Driver Provider AWS
 The Secrets Store CSI Driver Provider AWS is used with the Secrets Store CSI Driver to enable seamless integration with AWS services, specifically AWS Secrets Manager. It acts as a bridge between the Secrets Store CSI Driver and AWS Secrets Manager, allowing Kubernetes applications to securely access and manage secrets stored in AWS Secrets Manager.
 https://github.com/aws/secrets-store-csi-driver-provider-aws
-
-6. ## Reloader
-Reloader is a Kubernetes controller that is often used in conjunction with the Secrets Store CSI Driver to enable automatic reloading of pods when changes are made to secrets. 
-https://github.com/stakater/Reloader
-
 
 
 # Inputs
@@ -93,54 +64,3 @@ https://github.com/stakater/Reloader
 |oidc_provider_arn|The ARN of the OIDC Provider|
 |cluster-autosclaer-role-arn  |ARN of the cluster-autoscaler role|
 |cluster-version|version of cluster|
-
-# Secrets Store CSI Driver Usage
-
-To use the Secrets Store CSI driver, create a SecretProviderClass custom resource to provide driver configurations and provider-specific parameters to the CSI driver.
-A SecretProviderClass custom resource should have the following components:
-
-```
-apiVersion: secrets-store.csi.x-k8s.io/v1
-kind: SecretProviderClass
-metadata:
-  name: my-provider
-spec:
-  provider: aws   
-  secretObjects:
-  - secretName: eks-secret
-    type: Opaque
-    data:
-    - objectName: examplesecret
-      key: username
-  parameters:
-    objects: |
-      - objectName: "examplesecret"  # the AWS secret
-        objectType: "secretsmanager"
-```
-## Update your Deployment Yaml
-### Update Volume in Deployment Yaml
-```
-      volumes:
-        - name: secrets-store-inline
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "my-provider"
-```
-### Mount Volume from Container Spec in Deployment Yaml
-```
-          volumeMounts:
-            - name: secrets-store-inline
-              mountPath: "/mnt/"
-              readOnly: true
-```
-### Use Secret as ENV in Container Spec
-```
-          env:
-          - name: EXAMPLE_ENV
-            valueFrom:
-              secretKeyRef:
-                name: eks-secret
-                key: username
-```
